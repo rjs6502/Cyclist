@@ -7,6 +7,7 @@ public class Event {
 	 * ATTRIBUTES
 	 */
 	private Thread race;
+	private String name;
 	private Course course;
 	private ArrayList<Team> teams;
 	private ArrayList<Rider> riders;
@@ -21,11 +22,44 @@ public class Event {
 	/*
 	 * ACCESSORS AND MUTATORS
 	 */
+	public void setName(String _name){
+		name = _name;
+	}
+	public String getName(){
+		return name;
+	}
 	public void setCourse(Course _course){
 		course = _course;
 	}
 	public Course getCourse(){
 		return course;
+	}
+	public void setTeams(ArrayList<Team> _teams){
+		teams = _teams;
+	}
+	public ArrayList<Team> getTeams(){
+		return teams;
+	}
+	public void setRiders(ArrayList<Rider> _riders){
+		riders = _riders;
+	}
+	public ArrayList<Rider> getRiders(){
+		return riders;
+	}
+	
+	/*
+	 * GENERATOR FUNCTIONS
+	 */
+	public void generateCourse(){
+		
+	},
+	//teams -- used for pro races
+	public void generateTeams(){
+		
+	}
+	//riders -- used for not team - amateur races
+	public void generateRiders(){
+		
 	}
 	
 	/*

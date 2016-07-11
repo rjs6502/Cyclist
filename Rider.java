@@ -23,6 +23,9 @@ public class Rider {
 	private int height;
 	private int weight;
 	private Bike bike;
+	//private int ratingDownHill
+	private double totalDistanceCovered;
+	private double totalTime;
 	private int ratingMtn; // 1-10 (10 being the best)
 	private int ratingHill; // 1-10 (10 being the best)
 	private int ratingFlat; // 1-10 (10 being the best)
@@ -146,6 +149,7 @@ public class Rider {
 	public int getWeight(){
 		return weight;
 	}
+	
 	//mountain
 	public void setRatingMtn(int _ratingMtn){
 		ratingMtn = _ratingMtn;
@@ -355,23 +359,54 @@ public class Rider {
 	/*
 	 * GENERAL FUNCTIONALITY
 	 */
-	public double getDistanceCovered(int timeInSeconds){
-		return timeInSeconds * this.getSpeedFlat();
+	//riding -- return how long it took to complete a mtn, hill, flat or tt
+	public double getTotalDistanceCovered(){//(int timeInSeconds){
+		//distance  = time * speed
+		//return timeInSeconds * this.getSpeedFlat();
+		return totalDistanceCovered;
 	}
-	public void ride(int distance){
-		int timeElapsed = 0;
-		try
-		{
-			while(distance >= 0){
-				distance -= this.getDistanceCovered(timeElapsed);
-				timeElapsed++;
-				Thread.sleep(1000); // 1 second
-			}
-			System.out.println(this.getName() + " is done!");
-		}
-		catch(Exception e){
-			System.out.println(e);
-		}
+	public double getTotalTime(){
+		return totalTime;
+	}
+	public double rideMountain(int distance){
+		//time = distance/speed
+		double obstacleDistance = (double)distance;
+		double timeToCompleteObstacle = obstacleDistance/this.getSpeedMtn();
+		
+		totalDistanceCovered += distance;
+		totalTime += timeToCompleteObstacle;
+		
+		return timeToCompleteObstacle;
+	}
+	public double rideHill(int distance){
+		//time = distance/speed
+		double obstacleDistance = (double)distance;
+		double timeToCompleteObstacle = obstacleDistance/this.getSpeedHill();
+		
+		totalDistanceCovered += distance;
+		totalTime += timeToCompleteObstacle;
+		
+		return timeToCompleteObstacle;
+	}
+	public double rideFlat(int distance){
+		//time = distance/speed
+		double obstacleDistance = (double)distance;
+		double timeToCompleteObstacle = obstacleDistance/this.getSpeedFlat();
+		
+		totalDistanceCovered += distance;
+		totalTime += timeToCompleteObstacle;
+		
+		return timeToCompleteObstacle;
+	}
+	public double rideTT(int distance){
+		//time = distance/speed
+		double obstacleDistance = (double)distance;
+		double timeToCompleteObstacle = obstacleDistance/this.getSpeedTT();
+		
+		totalDistanceCovered += distance;
+		totalTime += timeToCompleteObstacle;
+		
+		return timeToCompleteObstacle;
 	}
 	
 	/*

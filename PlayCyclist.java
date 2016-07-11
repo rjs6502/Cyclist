@@ -25,56 +25,8 @@ public class PlayCyclist {
 //			"Team Jamis","Team WIGGINS","Veranda's Willems Cycling Team"
 //		};
 		
-		Rider rider = new Rider();
-		rider.generateRider();
-		Rider rider2 = new Rider();
-		rider2.generateRider();
-		Rider rider3 = new Rider();
-		rider3.generateRider();
-		
-//		//rider 1
-//		System.out.println("Name: " + rider.getName()); //name
-//		System.out.println("Age: " + rider.getAge()); //age
-//		System.out.println("Country: " + rider.getCountry()); //country
-//		System.out.println("Height: " + rider.getHeight()); //height
-//		System.out.println("Weight: " + rider.getWeight()); //weight
-//		System.out.println("Rating Mtn: " + rider.getRatingMtn()); //ratings
-//		System.out.println("Rating Hill: " + rider.getRatingHill()); //ratings
-//		System.out.println("Rating Flat: " + rider.getRatingFlat()); //ratings
-//		System.out.println("Rating TT: " + rider.getRatingTT()); //ratings
-//		System.out.println("Speed Mtn: " + rider.getSpeedMtn()); //ratings
-//		System.out.println("Speed Hill: " + rider.getSpeedHill()); //ratings
-//		System.out.println("Speed Flat: " + rider.getSpeedFlat()); //ratings
-//		System.out.println("Speed TT: " + rider.getSpeedTT() + "\n"); //ratings
-//		
-//		//rider 2
-//		System.out.println("Name: " + rider2.getName()); //name
-//		System.out.println("Age: " + rider2.getAge()); //age
-//		System.out.println("Country: " + rider2.getCountry()); //country
-//		System.out.println("Height: " + rider2.getHeight()); //height
-//		System.out.println("Weight: " + rider2.getWeight()); //weight
-//		System.out.println("Rating Mtn: " + rider2.getRatingMtn()); //ratings
-//		System.out.println("Rating Hill: " + rider2.getRatingHill()); //ratings
-//		System.out.println("Rating Flat: " + rider2.getRatingFlat()); //ratings
-//		System.out.println("Rating TT: " + rider2.getRatingTT()); //ratings
-//		System.out.println("Speed Mtn: " + rider2.getSpeedMtn()); //ratings
-//		System.out.println("Speed Hill: " + rider2.getSpeedHill()); //ratings
-//		System.out.println("Speed Flat: " + rider2.getSpeedFlat()); //ratings
-//		System.out.println("Speed TT: " + rider2.getSpeedTT() + "\n"); //ratings
-		
-//		Thread race = new Thread(){
-//			public void run(){
-//				rider.ride(100);
-//				rider2.ride(100);
-//				rider3.ride(100);
-//			}
-//		};
-//		
-//		race.start();
-		
 		Event tour = new Event();
 		tour.startEvent();
-
 	}
 	
 }

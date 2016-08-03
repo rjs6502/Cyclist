@@ -23,7 +23,7 @@ public class Rider {
 	private int height;
 	private int weight;
 	private Bike bike;
-	//private int ratingDownHill
+	//private int ratingDownHill //don't allow this to be set individually, just use it for the back side of hills and mountains
 	private double totalDistanceCovered;
 	private double totalTime;
 	private int ratingMtn; // 1-10 (10 being the best)
@@ -150,18 +150,14 @@ public class Rider {
 		return weight;
 	}
 	
+	/*
+	 * RATINGS AND SPEEDS
+	 */
 	//mountain
 	public void setRatingMtn(int _ratingMtn){
 		ratingMtn = _ratingMtn;
-	}
-	public int getRatingMtn(){
-		return ratingMtn;
-	}
-	public void setSpeedMtn(double _speedMtn){
-		speedMtn = _speedMtn;
-	}
-	public double getSpeedMtn(){
-		switch(this.getRatingMtn()){
+		
+		switch(_ratingMtn){
 			case 1:
 				this.setSpeedMtn(20.5);
 				break;
@@ -192,21 +188,25 @@ public class Rider {
 			case 10:
 				this.setSpeedMtn(25);
 				break;
+			default:
+				System.out.println("Invalid MOUNTAIN rating");
+				break;
 		}
+	}
+	public int getRatingMtn(){
+		return ratingMtn;
+	}
+	public void setSpeedMtn(double _speedMtn){
+		speedMtn = _speedMtn;
+	}
+	public double getSpeedMtn(){
 		return speedMtn;
 	}
 	//hill
 	public void setRatingHill(int _ratingHill){
 		ratingHill = _ratingHill;
-	}
-	public int getRatingHill(){
-		return ratingHill;
-	}
-	public void setSpeedHill(double _speedHill){
-		speedHill = _speedHill;
-	}
-	public double getSpeedHill(){
-		switch(this.getRatingHill()){
+		
+		switch(_ratingHill){
 			case 1:
 				this.setSpeedHill(23.3);
 				break;
@@ -237,21 +237,25 @@ public class Rider {
 			case 10:
 				this.setSpeedHill(26);
 				break;
+			default:
+				System.out.println("Invalid HILL rating");
+				break;
 		}
+	}
+	public int getRatingHill(){
+		return ratingHill;
+	}
+	public void setSpeedHill(double _speedHill){
+		speedHill = _speedHill;
+	}
+	public double getSpeedHill(){
 		return speedHill;
 	}
 	//flat
 	public void setRatingFlat(int _ratingFlat){
 		ratingFlat = _ratingFlat;
-	}
-	public int getRatingFlat(){
-		return ratingFlat;
-	}
-	public void setSpeedFlat(double _speedFlat){
-		speedFlat = _speedFlat;
-	}
-	public double getSpeedFlat(){
-		switch(this.getRatingFlat()){
+		
+		switch(_ratingFlat){
 			case 1:
 				this.setSpeedFlat(25.3);
 				break;
@@ -282,21 +286,25 @@ public class Rider {
 			case 10:
 				this.setSpeedFlat(28);
 				break;
+			default:
+				System.out.println("Invalid FLAT rating");
+				break;
 		}
+	}
+	public int getRatingFlat(){
+		return ratingFlat;
+	}
+	public void setSpeedFlat(double _speedFlat){
+		speedFlat = _speedFlat;
+	}
+	public double getSpeedFlat(){
 		return speedFlat;
 	}
 	//time trial
 	public void setRatingTT(int _ratingTT){
 		ratingTT = _ratingTT;
-	}
-	public int getRatingTT(){
-		return ratingTT;
-	}
-	public void setSpeedTT(double _speedTT){
-		speedFlat = _speedTT;
-	}
-	public double getSpeedTT(){
-		switch(this.getRatingTT()){
+		
+		switch(_ratingTT){
 			case 1:
 				this.setSpeedTT(29.2);
 				break;
@@ -327,7 +335,17 @@ public class Rider {
 			case 10:
 				this.setSpeedTT(31);
 				break;
+			default:
+				System.out.println("Invalid TIME TRIAL rating");
 		}
+	}
+	public int getRatingTT(){
+		return ratingTT;
+	}
+	public void setSpeedTT(double _speedTT){
+		speedFlat = _speedTT;
+	}
+	public double getSpeedTT(){
 		return speedTT;
 	}
 	//overall rating
@@ -471,4 +489,5 @@ public class Rider {
 		this.generateCountry();
 		this.generateRatings();
 	}
+
 }

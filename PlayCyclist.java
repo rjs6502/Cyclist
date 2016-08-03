@@ -4,7 +4,9 @@ public class PlayCyclist {
 	
 	public static void main(String[] args){
 		
-//		String[] firstTier = {
+//***************************************************EXTRA STUFF**************************************************************************
+		
+//		String[] topTier = {
 //			"AG2R La Mondiale","Astana Pro Team","BMC Racing Team","Cannondale Pro Cycling","Dimension Data","Etixx - Quick-Step",
 //			"FDJ","IAM Cycling","Lampre-Merida","Lotto Soudal","Movistar Team","Orica - GreenEdge","Team Giant - Alpecin","Team Katusha",
 //			"Team LottoNl-Jumbo","Team Sky","Tincoff Team","Trek-Segafredo"
@@ -24,6 +26,24 @@ public class PlayCyclist {
 //			"Skydive Dubai Pro Cycling Team","State of Matter MAAP Racing","Synergy Baku Cycling Project","Team 3M","Team Illuminate",
 //			"Team Jamis","Team WIGGINS","Veranda's Willems Cycling Team"
 //		};
+		
+		
+//		for(Rider rider: riders){
+//			race = new Thread(){
+//				public void run(){
+//					
+//					rider.rideFlat(30);
+//					rider.rideHill(10);
+//					rider.rideFlat(30);
+//					rider.rideMountain(30);
+//					
+//					finishedRiders.add(rider);
+//				}
+//			};
+//			race.start();
+//		}
+
+//****************************************************************************************************************************************
 		
 		Event tour = new Event();
 		tour.startEvent();

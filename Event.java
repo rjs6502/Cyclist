@@ -99,18 +99,12 @@ public class Event{
 		Rider rider3 = new Rider();
 		Rider rider4 = new Rider();
 		Rider rider5 = new Rider();
-		Rider rider6 = new Rider();
-		Rider rider7 = new Rider();
-		Rider rider8 = new Rider();
 		
 		rider1.generateRider();
 		rider2.generateRider();
 		rider3.generateRider();
 		rider4.generateRider();
 		rider5.generateRider();
-		rider6.generateRider();
-		rider7.generateRider();
-		rider8.generateRider();
 		
 		//this.addTeam(team1);
 		//this.addTeam(team2);
@@ -119,9 +113,6 @@ public class Event{
 		this.addRider(rider3);
 		this.addRider(rider4);
 		this.addRider(rider5);
-		this.addRider(rider6);
-		this.addRider(rider7);
-		this.addRider(rider8);
 		
 		/*
 		 * RACE
@@ -133,52 +124,100 @@ public class Event{
 			rider.rideMountain(30);
 			
 			finishedRiders.add(rider);
-			System.out.println(rider.getName() + " - " + rider.getTotalTime());
+			System.out.println("Rider: " + rider.getName() + " finished!  --> " + rider.getTotalTime());
 		}
-		System.out.println("\n");
 		
 		/*
 		 * PLACE RIDERS
 		 */
 		Rider firstPlace = finishedRiders.get(0);
 		Rider secondPlace = new Rider();
-		Rider thirdPlace = new Rider();
+		//Rider thirdPlace = new Rider();
 		
-		for(int i=0; i<finishedRiders.size(); i++){
-			for(int j=i+1; j<finishedRiders.size(); j++){
-				
-				Rider currentRider = finishedRiders.get(j);
-			
-				//THIS SORT OF WORKS -- DONT GET RID OF IT!!!!!!!!!
-				//firstPlace rider changes -- shift the standings
-				if(currentRider.getTotalTime() < firstPlace.getTotalTime()){
-					secondPlace = firstPlace;
-					firstPlace = currentRider;
-				}
-				//firstPlace rider remains the same
-				else if(currentRider.getTotalTime() > firstPlace.getTotalTime()){
-					//if secondPlace hasn't been set then set it
-					if(secondPlace.getName() == null){
-						secondPlace = currentRider;
-					}
-					//otherwise compare secondPlace to the current rider
-					else{
-						//secondPlace rider changes -- shift the standings
-						if(currentRider.getTotalTime() < secondPlace.getTotalTime()){
-							thirdPlace = secondPlace;
-							secondPlace = currentRider;
-						}
-						//secondPlace rider remains the same
-						else if(currentRider.getTotalTime() > secondPlace.getTotalTime()){
-							thirdPlace = currentRider;
-						}
-					}
-				}
-			}
-		}
+		System.out.println("\nThe overall leader is currently " + firstPlace.getName() + " - " + firstPlace.getTotalTime());
 		
-		System.out.println(firstPlace.getName() + " - " + firstPlace.getTotalTime());
-		System.out.println(secondPlace.getName() + " - " + secondPlace.getTotalTime());
-		System.out.println(thirdPlace.getName() + " - " + thirdPlace.getTotalTime());
+//		for(int i=0; i<finishedRiders.size(); i++){
+//			for(int j=i+1; j<finishedRiders.size(); j++){
+//				
+//				//rider J was FASTER than firstPlace -- new first place rider!
+//				if(firstPlace.getTotalTime() < finishedRiders.get(j).getTotalTime()){
+//					
+//					if(secondPlace.getTotalTime() < finishedRiders.get(j).getTotalTime()){
+//						
+//					}
+//					else if(secondPlace.getTotalTime() > finishedRiders.get(j).getTotalTime()){
+//						secondPlace = finishedRiders.get(j);
+//					}
+//					
+//					System.out.println("\nOverall leader is still " + firstPlace.getName() + "\nTime: " + firstPlace.getTotalTime());
+//				}
+//				else if(firstPlace.getTotalTime() > finishedRiders.get(j).getTotalTime()){
+//					secondPlace = firstPlace;
+//					firstPlace = finishedRiders.get(j);
+//					System.out.println("\nNew overall leader!! -- " + firstPlace.getName() + "\nTime: " + firstPlace.getTotalTime());
+//				}
+//			}
+//		}
+		
+		System.out.println("\nFirst Place: " + firstPlace.getName() + "\n - Time: " + firstPlace.getTotalTime());
+		System.out.println("Second Place: " + secondPlace.getName() + "\n - Time: " + secondPlace.getTotalTime());
+		
 	}
+	
 }
+
+
+
+
+
+
+
+
+
+/*
+public class MyBubbleSort {
+  
+    // logic to sort the elements
+    public static void bubble_srt(int array[]) {
+        int n = array.length;
+        int k;
+        for (int m = n; m >= 0; m--) {
+            for (int i = 0; i < n - 1; i++) {
+                k = i + 1;
+                if (array[i] > array[k]) {
+                    swapNumbers(i, k, array);
+                }
+            }
+            printNumbers(array);
+        }
+    }
+  
+    private static void swapNumbers(int i, int j, int[] array) {
+  
+        int temp;
+        temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+  
+    private static void printNumbers(int[] input) {
+          
+        for (int i = 0; i < input.length; i++) {
+            System.out.print(input[i] + ", ");
+        }
+        System.out.println("\n");
+    }
+  
+    public static void main(String[] args) {
+        int[] input = { 4, 2, 9, 6, 23, 12, 34, 0, 1 };
+        bubble_srt(input);
+  
+    }
+}
+
+
+
+for(int i=0;i<n-1;i++) {="" for(int="" j="0;j&lt;n-1-i;j++)" if(array[j]="">array[j+1])
+swapNumbers(j,j+1,array);
+}
+*/

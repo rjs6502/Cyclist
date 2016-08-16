@@ -1,18 +1,19 @@
-//Racing Event
 import java.util.*;
 
-public class Event{
+public class Event {
 	
 	/*
 	 * ATTRIBUTES
 	 */
-	private Thread race;
 	private String name;
 	private Course course;
 	private ArrayList<Team> teams;
 	private ArrayList<Rider> riders;
 	private ArrayList<Rider> finishedRiders;
-	private ArrayList<Rider> standings;
+	private ArrayList<Rider> mountainJerseyStandings;
+	private ArrayList<Rider> sprintJerseyStandings;
+	private ArrayList<Rider> youngRiderJerseyStandings;
+	private ArrayList<Rider> overallLeaderJerseyStandings;
 	
 	/*
 	 * DEFAULT CONSTRUCTOR
@@ -21,20 +22,23 @@ public class Event{
 		teams = new ArrayList<Team>();
 		riders = new ArrayList<Rider>();
 		finishedRiders = new ArrayList<Rider>();
-		standings = new ArrayList<Rider>();
+		mountainJerseyStandings = new ArrayList<Rider>();
+		sprintJerseyStandings = new ArrayList<Rider>();
+		youngRiderJerseyStandings = new ArrayList<Rider>();
+		overallLeaderJerseyStandings = new ArrayList<Rider>();
 	}
 	
 	/*
 	 * ACCESSORS AND MUTATORS
 	 */
-	//name
+	//Name
 	public void setName(String _name){
 		name = _name;
 	}
 	public String getName(){
 		return name;
 	}
-	//course
+	//Course
 	public void setCourse(Course _course){
 		course = _course;
 	}
@@ -44,14 +48,18 @@ public class Event{
 	//teams
 	public void setTeams(ArrayList<Team> _teams){
 		teams = _teams;
+		for(Team team: teams){
+			for(Rider rider: team.getRiders()){
+				riders.add(rider);
+			}
+		}
 	}
 	public ArrayList<Team> getTeams(){
 		return teams;
 	}
-	public void addTeam(Team _team){
-		teams.add(_team);
-		
-		for(Rider rider: _team.getRiders()){
+	public void addTeam(Team team){
+		teams.add(team);
+		for(Rider rider: team.getRiders()){
 			riders.add(rider);
 		}
 	}
@@ -65,159 +73,114 @@ public class Event{
 	public void addRider(Rider rider){
 		riders.add(rider);
 	}
-	
-	/*
-	 * GENERATOR FUNCTIONS
-	 */
-	public void generateCourse(){
-		
+	//mountain jersey
+	public void setMountainJerseyStandings(Rider firstPlace, Rider secondPlace, Rider thirdPlace){
+		mountainJerseyStandings.add(firstPlace);
+		mountainJerseyStandings.add(secondPlace);
+		mountainJerseyStandings.add(thirdPlace);
 	}
-	//teams -- used for pro races
-	public void generateTeams(){
-		
+	public ArrayList<Rider> getMountainJerseyStandings(){
+		return mountainJerseyStandings;
 	}
-	//riders -- used for not team - amateur races
-	public void generateRiders(){
-		
+	//sprint jersey
+	public void setSprintJerseyStandings(Rider firstPlace, Rider secondPlace, Rider thirdPlace){
+		sprintJerseyStandings.add(firstPlace);
+		sprintJerseyStandings.add(secondPlace);
+		sprintJerseyStandings.add(thirdPlace);
 	}
-	
+	public ArrayList<Rider> getSprintJerseyStandings(){
+		return sprintJerseyStandings;
+	}
+	//young rider jersey
+	public void setYoungRiderJerseyStandings(Rider firstPlace, Rider secondPlace, Rider thirdPlace){
+		youngRiderJerseyStandings.add(firstPlace);
+		youngRiderJerseyStandings.add(secondPlace);
+		youngRiderJerseyStandings.add(thirdPlace);
+	}
+	public ArrayList<Rider> getYoungRiderJerseyStandings(){
+		return youngRiderJerseyStandings;
+	}
+	//overall leader jersey
+	public void setOverallLeaderJerseyStandings(Rider firstPlace, Rider secondPlace, Rider thirdPlace){
+		overallLeaderJerseyStandings.add(firstPlace);
+		overallLeaderJerseyStandings.add(secondPlace);
+		overallLeaderJerseyStandings.add(thirdPlace);
+	}
+	public ArrayList<Rider> getOverallLeaderJerseyStandings(){
+		return overallLeaderJerseyStandings;
+	}
+
 	/*
 	 * GENERAL FUNCTIONALITY
 	 */
+	public void swapRiders(int firstRider, int secondRider){
+		Rider tempRider = finishedRiders.get(firstRider);
+		finishedRiders.set(firstRider, finishedRiders.get(secondRider));
+		finishedRiders.set(secondRider, tempRider);
+	}
+	public void placeRiders(){
+		for(int i=0; i<finishedRiders.size(); i++){
+			for(int k=i+1; k<finishedRiders.size(); k++){
+				if(finishedRiders.get(i).getRaceTime() > finishedRiders.get(k).getRaceTime()){
+					this.swapRiders(i,k);
+				}
+			}
+		}
+	}
+	
+	//start event
 	public void startEvent(){
 		
-		/*
-		 * SET UP TEAMS/RIDERS
-		 */
-		Team team1 = new Team();
-		team1.generateTeam();
-		Team team2 = new Team();
-		team2.generateTeam();
-		
+		//Open riders
 		Rider rider1 = new Rider();
-		Rider rider2 = new Rider();
-		Rider rider3 = new Rider();
-		Rider rider4 = new Rider();
-		Rider rider5 = new Rider();
-		
 		rider1.generateRider();
+		Rider rider2 = new Rider();
 		rider2.generateRider();
+		Rider rider3 = new Rider();
 		rider3.generateRider();
+		Rider rider4 = new Rider();
 		rider4.generateRider();
+		Rider rider5 = new Rider();
 		rider5.generateRider();
+		Rider rider6 = new Rider();
+		rider6.generateRider();
 		
-		//this.addTeam(team1);
-		//this.addTeam(team2);
+		//Teams
+		Team team1 = new Team();
+		team1.generateRiders();
+		Team team2 = new Team();
+		team2.generateRiders();
+		
+		//add teams and riders
 		this.addRider(rider1);
 		this.addRider(rider2);
 		this.addRider(rider3);
 		this.addRider(rider4);
 		this.addRider(rider5);
+		this.addRider(rider6);
+		//this.addTeam(team1);
+		//this.addTeam(team2);
 		
-		/*
-		 * RACE
-		 */
+		//race
 		for(Rider rider: riders){
-			rider.rideFlat(30);
+			rider.rideFlat(35);
 			rider.rideHill(10);
-			rider.rideFlat(30);
-			rider.rideMountain(30);
+			rider.rideFlat(35);
+			rider.rideMountain(20);
+			rider.rideFlat(10);
 			
 			finishedRiders.add(rider);
-			System.out.println("Rider: " + rider.getName() + " finished!  --> " + rider.getTotalTime());
 		}
 		
-		/*
-		 * PLACE RIDERS
-		 */
-		Rider firstPlace = finishedRiders.get(0);
-		Rider secondPlace = new Rider();
-		//Rider thirdPlace = new Rider();
+		//place riders
+		this.placeRiders();
 		
-		System.out.println("\nThe overall leader is currently " + firstPlace.getName() + " - " + firstPlace.getTotalTime());
-		
-//		for(int i=0; i<finishedRiders.size(); i++){
-//			for(int j=i+1; j<finishedRiders.size(); j++){
-//				
-//				//rider J was FASTER than firstPlace -- new first place rider!
-//				if(firstPlace.getTotalTime() < finishedRiders.get(j).getTotalTime()){
-//					
-//					if(secondPlace.getTotalTime() < finishedRiders.get(j).getTotalTime()){
-//						
-//					}
-//					else if(secondPlace.getTotalTime() > finishedRiders.get(j).getTotalTime()){
-//						secondPlace = finishedRiders.get(j);
-//					}
-//					
-//					System.out.println("\nOverall leader is still " + firstPlace.getName() + "\nTime: " + firstPlace.getTotalTime());
-//				}
-//				else if(firstPlace.getTotalTime() > finishedRiders.get(j).getTotalTime()){
-//					secondPlace = firstPlace;
-//					firstPlace = finishedRiders.get(j);
-//					System.out.println("\nNew overall leader!! -- " + firstPlace.getName() + "\nTime: " + firstPlace.getTotalTime());
-//				}
-//			}
-//		}
-		
-		System.out.println("\nFirst Place: " + firstPlace.getName() + "\n - Time: " + firstPlace.getTotalTime());
-		System.out.println("Second Place: " + secondPlace.getName() + "\n - Time: " + secondPlace.getTotalTime());
-		
-	}
+		//results
+		int place = 1;
+		for(Rider rider: finishedRiders){
+			System.out.println(place + ": " + rider.getName() + " - " + rider.getRaceTime());
+			place++;
+		}
 	
+	}
 }
-
-
-
-
-
-
-
-
-
-/*
-public class MyBubbleSort {
-  
-    // logic to sort the elements
-    public static void bubble_srt(int array[]) {
-        int n = array.length;
-        int k;
-        for (int m = n; m >= 0; m--) {
-            for (int i = 0; i < n - 1; i++) {
-                k = i + 1;
-                if (array[i] > array[k]) {
-                    swapNumbers(i, k, array);
-                }
-            }
-            printNumbers(array);
-        }
-    }
-  
-    private static void swapNumbers(int i, int j, int[] array) {
-  
-        int temp;
-        temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-  
-    private static void printNumbers(int[] input) {
-          
-        for (int i = 0; i < input.length; i++) {
-            System.out.print(input[i] + ", ");
-        }
-        System.out.println("\n");
-    }
-  
-    public static void main(String[] args) {
-        int[] input = { 4, 2, 9, 6, 23, 12, 34, 0, 1 };
-        bubble_srt(input);
-  
-    }
-}
-
-
-
-for(int i=0;i<n-1;i++) {="" for(int="" j="0;j&lt;n-1-i;j++)" if(array[j]="">array[j+1])
-swapNumbers(j,j+1,array);
-}
-*/

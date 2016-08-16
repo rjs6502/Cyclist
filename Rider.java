@@ -1,3 +1,5 @@
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.*;
 
 public class Rider {
@@ -23,18 +25,15 @@ public class Rider {
 	private int height;
 	private int weight;
 	private Bike bike;
-	//private int ratingDownHill //don't allow this to be set individually, just use it for the back side of hills and mountains
-	private double totalDistanceCovered;
-	private double totalTime;
 	private int ratingMtn; // 1-10 (10 being the best)
 	private int ratingHill; // 1-10 (10 being the best)
 	private int ratingFlat; // 1-10 (10 being the best)
 	private int ratingTT; // 1-10 (10 being the best)
-	private double speedMtn; // ratio of ratingMtn:mph
-	private double speedHill; // ratio of ratingHill:mph
-	private double speedFlat; // ratio of ratingFlat:mph
-	private double speedTT; // ratio of ratingTT:mph
-	private double currentSpeed; //mph
+	private double speedMtn;
+	private double speedHill;
+	private double speedFlat;
+	private double speedTT;
+	private double raceTime;
 	private String[] firstName = { //generator -- first name
 		"Noah","Liam","Mason","Jacob","William","Ethan","James","Alexander","Michael","Benjamin",
 		"Elijah","Daniel","Aiden","Logan","Matthew","Lucas","Jackson","David","Oliver","Jayden",
@@ -149,10 +148,6 @@ public class Rider {
 	public int getWeight(){
 		return weight;
 	}
-	
-	/*
-	 * RATINGS AND SPEEDS
-	 */
 	//mountain
 	public void setRatingMtn(int _ratingMtn){
 		ratingMtn = _ratingMtn;
@@ -187,9 +182,6 @@ public class Rider {
 				break;
 			case 10:
 				this.setSpeedMtn(25);
-				break;
-			default:
-				System.out.println("Invalid MOUNTAIN rating");
 				break;
 		}
 	}
@@ -237,9 +229,6 @@ public class Rider {
 			case 10:
 				this.setSpeedHill(26);
 				break;
-			default:
-				System.out.println("Invalid HILL rating");
-				break;
 		}
 	}
 	public int getRatingHill(){
@@ -285,9 +274,6 @@ public class Rider {
 				break;
 			case 10:
 				this.setSpeedFlat(28);
-				break;
-			default:
-				System.out.println("Invalid FLAT rating");
 				break;
 		}
 	}
@@ -335,8 +321,6 @@ public class Rider {
 			case 10:
 				this.setSpeedTT(31);
 				break;
-			default:
-				System.out.println("Invalid TIME TRIAL rating");
 		}
 	}
 	public int getRatingTT(){
@@ -365,64 +349,55 @@ public class Rider {
 	public Bike getBike(){
 		return bike;
 	}
-	//current speed -- handle this with the Event class
-	public void setCurrentSpeed(int _currentSpeed){
-		currentSpeed = _currentSpeed;
+	//race time
+	public double getRaceTime(){
+		DecimalFormat formatter = new DecimalFormat("#.###");
+		double formattedTime = Double.parseDouble(formatter.format(raceTime));
+		
+		
+		return formattedTime;
 	}
-	public double getCurrentSpeed(){
-		return currentSpeed;
-	}
-	
 	
 	/*
 	 * GENERAL FUNCTIONALITY
 	 */
-	//riding -- return how long it took to complete a mtn, hill, flat or tt
-	public double getTotalDistanceCovered(){//(int timeInSeconds){
-		//distance  = time * speed
-		//return timeInSeconds * this.getSpeedFlat();
-		return totalDistanceCovered;
-	}
-	public double getTotalTime(){
-		return totalTime;
-	}
+	//Ride Mountain
 	public double rideMountain(int distance){
 		//time = distance/speed
 		double obstacleDistance = (double)distance;
 		double timeToCompleteObstacle = obstacleDistance/this.getSpeedMtn();
 		
-		totalDistanceCovered += distance;
-		totalTime += timeToCompleteObstacle;
+		raceTime += timeToCompleteObstacle;
 		
 		return timeToCompleteObstacle;
 	}
+	//Ride Hill
 	public double rideHill(int distance){
 		//time = distance/speed
 		double obstacleDistance = (double)distance;
 		double timeToCompleteObstacle = obstacleDistance/this.getSpeedHill();
 		
-		totalDistanceCovered += distance;
-		totalTime += timeToCompleteObstacle;
+		raceTime += timeToCompleteObstacle;
 		
 		return timeToCompleteObstacle;
 	}
+	//Ride Flat
 	public double rideFlat(int distance){
 		//time = distance/speed
 		double obstacleDistance = (double)distance;
 		double timeToCompleteObstacle = obstacleDistance/this.getSpeedFlat();
 		
-		totalDistanceCovered += distance;
-		totalTime += timeToCompleteObstacle;
+		raceTime += timeToCompleteObstacle;
 		
 		return timeToCompleteObstacle;
 	}
-	public double rideTT(int distance){
+	//Ride Time Trial
+	public double rideTimeTrial(int distance){
 		//time = distance/speed
 		double obstacleDistance = (double)distance;
 		double timeToCompleteObstacle = obstacleDistance/this.getSpeedTT();
 		
-		totalDistanceCovered += distance;
-		totalTime += timeToCompleteObstacle;
+		raceTime += timeToCompleteObstacle;
 		
 		return timeToCompleteObstacle;
 	}
@@ -489,5 +464,4 @@ public class Rider {
 		this.generateCountry();
 		this.generateRatings();
 	}
-
 }

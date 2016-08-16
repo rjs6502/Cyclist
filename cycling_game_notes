@@ -3,19 +3,16 @@ Cycling Game:
 - individual racer until you reach a certain overall rating then you can qualify to be picked up by a team
 - you play the game as an individual rider
 - races auto-gen "open-racers" but at the start of game, pro teams are made and generated with a team of riders
-- come up with conversion function to take ratings and make them mph
-- a rider only knows about their current speed --> an object knows how much to reduce speed by --> the Event handles all the checking
-- speed * time = distance <-- use this for seeing how far the riders have gone and how far they have left
 
 - objects and their functionality
-	- rider
+	- Rider
 		- name
 		- age
 		- country
 		- height
 		- weight
 		- bike
-		- rating
+		- rating (1-10)
 			- mtn rating
 			- hill rating
 			- flat rating
@@ -25,16 +22,16 @@ Cycling Game:
 			- hill speed
 			- flat speed
 			- time trial speed
-		- currentSpeed
-			- to be set by the event to account for obstacles adjusting speed
-		- functionality
-			- generate first name
-			- generate last name
-			- generate age
-			- generate physicals (height and weight)
-			- generate country
-			- generate ratings
-	- bike
+		- Generator Functions
+			- name
+			- age
+			- country
+			- height
+			- weight
+			- bike
+			- ratings
+			- rider
+	- Bike
 		- name
 		- rating
 			- mtn rating
@@ -42,14 +39,14 @@ Cycling Game:
 			- flat rating
 			- time trial rating
 		- functions
-			- generate name (make n model)
+			- generate name (make and model)
 			- generate ratings
-	- team
+	- Team
 		- name
 		- country
 		- team bike
 		- riders<Rider>(20)
-	- obstacle
+	- Obstacle
 		- type
 			- mtn -- avg spd: 20 to 25 mph (5mph/10ratings=0.5 difference for each rating)
 			- hill -- avg spd: 23 to 26 mph (3mph/10ratings=0.3 difference for each rating)
@@ -61,41 +58,36 @@ Cycling Game:
 		- points available for finishing the obstacle in top 3
 		- functionality
 			- would like to auto-gen an obstacle based on its type
-	- course
+	- Course
 		- name
 		- country
-		- obstacels<obstacle>() (this will be the profile of the course)
-			- need a variable that shows distance from start line this obstacle occurs
 		- distance
-		- functionality
-			- will want to be able to auto-generate a courses
-			- adding your own created obstacle
-	- event (will contain at least 1 course, could have multiple courses)
+		- obstacels<obstacle>() (this will be the profile of the course)
+		- Generator Functions
+			- country
+			- distance
+			- course
+		- Other Functionality
+			- adding adn removing obstacles
+	- Event (can be 1 course or a series of courses called a Tour)
 		- name
-		- country
-		- start date of event
-		- end date of event
-		- courses<course>() (at least 1 course)
-		- teams<team>(20)
-		- scoring
-			- top 3 finishers for each obstacle on the course
-		- functionality
-			- auto-generate an event of courses
-			- adding a custom course
-			- adding a team
-			- keeping track of event leaders
+		- start date
+		- end date
+		- courses<course>
+		- teams<team>
+		- Generator Functions
+			- riders
+			- teams
+			- course
+			- tour (multiple courses)
+		- Other Functionality
+			- adding and removing a custom course
+			- adding and removing a team
+			- adding and removing a rider
 			- start the race for all racers
-			- adjust racers speed based on obstacles
-				- default to flat
-	- racer (thread)
-		- distance covered
-		- use this and the rider object to construct a racer
-		- adjust and set the "speed" they race at
-			- mtn
-			- hill
-			- flat
-			- tt
-		- get the profile of the course
-		- adjust speed at beginning of obst
+			- scoring
+				- Climber's Jersey: top 3 finishers get points
+				- Sprinter's Jersey: top 3 finishers get points
+				- Leader's Jersey: top 3 finishers get points
 
 

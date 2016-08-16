@@ -1,3 +1,6 @@
+//a course object will be able to construct itself
+//possibly keep track of each jersey's points then worry about accumulating the points in an event
+
 import java.util.*;
 
 //can be a time trial or a normal race
@@ -15,7 +18,6 @@ public class Course {
 	private String name;
 	private String country;
 	private int distance;
-	private ArrayList<Obstacle> profile;
 	
 	/*
 	 * DEFAULT CONSTRUCTOR
@@ -47,13 +49,5 @@ public class Course {
 	}
 	public int getDistance(){
 		return distance;
-	}
-	
-	/*
-	 * GENERAL FUNCTIONALITY
-	 */
-	public void addObstacle(Obstacle obstacle, int distanceFromStart){
-		//distanceFromStart indicates where the "flat" "hill" or "mountain" starts
-		//get the distance of the object to know when the obstacle ends and continues to be flat
 	}
 }

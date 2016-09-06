@@ -1,17 +1,10 @@
 //a course object will be able to construct itself
 //possibly keep track of each jersey's points then worry about accumulating the points in an event
 
-import java.util.*;
+
 
 //can be a time trial or a normal race
 public class Course {
-	/*
-	 * STATIC VALUES
-	 */
-	private final int MIN_DISTANCE = 100; //miles
-	private final int MAX_DISTANCE = 250; //miles
-	private final int TT_MIN_DISTANCE = 2; //miles
-	private final int TT_MAX_DISTANCE = 5; //miles
 	/*
 	 * ATTRIBUTES
 	 */

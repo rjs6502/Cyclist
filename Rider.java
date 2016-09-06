@@ -1,20 +1,7 @@
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.*;
 
-public class Rider {
-	/*
-	 * STATIC VALUES
-	 */
-	private final int MIN_AGE	 = 16;
-	private final int MAX_AGE	 = 40;
-	private final int MIN_HEIGHT = 64; //inches (5'4")
-	private final int MAX_HEIGHT = 74; //inches (6'2")
-	private final int MIN_WEIGHT = 115; //lbs
-	private final int MAX_WEIGHT = 170; //lbs
-	private final int MIN_RATING = 1;
-	private final int MAX_RATING = 10;
-	
+public class Rider implements Runnable{
 	/*
 	 * ATTRIBUTES
 	 */
@@ -361,6 +348,35 @@ public class Rider {
 	/*
 	 * GENERAL FUNCTIONALITY
 	 */
+	
+	//Ride
+	public void ride(int distance){
+		int distanceCovered = 0; //keeps track of distance covered
+		double timeCheck = 0; //keeps track of overall time
+		double time = distance / this.getSpeedFlat(); //total time to complete the course
+		double minutesPerMile = ( time / distance) * 60; //used for adjusting Thread.sleep() based on a riders speed
+		boolean racing = true;
+		
+		System.out.println(this.getName() + " started!");
+		//every loop is 1 mile
+		while(racing){
+			try
+			{	
+				if(distanceCovered < distance){
+					Thread.sleep((long)(minutesPerMile * 500)); //Time to complete 1 mile
+					timeCheck += minutesPerMile;
+					distanceCovered++; //completed a mile
+				}
+				else if(distanceCovered == distance){
+					System.out.println(this.getName() + " " + " is done! - " + timeCheck + " - " + this.getSpeedFlat());
+					racing = false;
+				}
+			}
+			catch(Exception e){
+				System.out.println(e);
+			}
+		}
+	}
 	//Ride Mountain
 	public double rideMountain(int distance){
 		//time = distance/speed
@@ -401,12 +417,7 @@ public class Rider {
 		
 		return timeToCompleteObstacle;
 	}
-	
-	/*
-	 * AUTO-GEN FUNCTIONS
-	 * generate random info for a given rider object
-	 */
-	//ratings -- eventually use it to generate pro teams with a minimum rider overall of 'x'
+	//Ratings -- eventually use it to generate pro teams with a minimum rider overall of 'x'
 	public void generateRatings(){
 		
 		Random randomRatingMtn = new Random();
@@ -434,7 +445,7 @@ public class Rider {
 			this.setRatingTT(newTTRating);
 		}
 	}
-	//name
+	//Name
 	public void generateName(){		
 		this.setName(
 				firstName[rand.nextInt(firstName.length)] + " " + 
@@ -442,26 +453,31 @@ public class Rider {
 				middleLastName[rand.nextInt(middleLastName.length)]+
 				endLastName[rand.nextInt(endLastName.length)]);
 	}
-	//country
+	//Country
 	public void generateCountry(){
 		this.setCountry(countries[rand.nextInt(countries.length)]);
 				
 	}
-	//age
+	//Age
 	public void generateAge(){
 		this.setAge(rand.nextInt((40-16)+1)+16);
 	}
-	//physicals -- height & weight
+	//Physicals -- height & weight
 	public void generatePhysicals(){
 		this.setHeight(rand.nextInt((74-64)+1)+64);
 		this.setWeight(rand.nextInt((170-115)+1)+115);
 	}
-	//rider-auto-gen
+	//Rider-auto-gen
 	public void generateRider(){
 		this.generateName();
 		this.generateAge();
 		this.generatePhysicals();
 		this.generateCountry();
 		this.generateRatings();
+	}
+	
+	@Override
+	public void run() {
+		this.ride(21);
 	}
 }

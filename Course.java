@@ -1,9 +1,5 @@
-//a course object will be able to construct itself
-//possibly keep track of each jersey's points then worry about accumulating the points in an event
+import java.util.*;
 
-
-
-//can be a time trial or a normal race
 public class Course {
 	/*
 	 * ATTRIBUTES
@@ -11,12 +7,13 @@ public class Course {
 	private String name;
 	private String country;
 	private int distance;
+	private ArrayList<Obstacle> courseProfile;
 	
 	/*
 	 * DEFAULT CONSTRUCTOR
 	 */
 	public Course(){
-		
+		courseProfile = new ArrayList<Obstacle>();
 	}
 	
 	/*
@@ -43,4 +40,12 @@ public class Course {
 	public int getDistance(){
 		return distance;
 	}
+	//race course
+	public void setCourseProfile(ArrayList<Obstacle> _courseProfile){
+		courseProfile = _courseProfile;
+	}
+	public ArrayList<Obstacle> getCourseProfile(){
+		return courseProfile;
+	}
+	
 }

@@ -350,7 +350,7 @@ public class Rider implements Runnable{
 	 */
 	
 	//Ride
-	public void ride(int distance){
+	public void ride(int distance){//, Course course){
 		int distanceCovered = 0; //keeps track of distance covered
 		double timeCheck = 0; //keeps track of overall time
 		double time = distance / this.getSpeedFlat(); //total time to complete the course
@@ -363,7 +363,7 @@ public class Rider implements Runnable{
 			try
 			{	
 				if(distanceCovered < distance){
-					Thread.sleep((long)(minutesPerMile * 500)); //Time to complete 1 mile
+					Thread.sleep((long)(minutesPerMile * 500)); //Time to complete 1 mile (multiplying by 500 to speed up simulation)
 					timeCheck += minutesPerMile;
 					distanceCovered++; //completed a mile
 				}

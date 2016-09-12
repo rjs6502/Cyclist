@@ -1,3 +1,7 @@
+/*
+ * GREEN JERSEY - 1st:20 2nd: 3rd: 4th: 5th: 6th: 7th: 8th: 9th:7 10th:6 11th:5 12th:4 13th:3 14th:2 15th:1
+ */
+
 import java.util.*;
 
 public class Event {

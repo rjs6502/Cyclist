@@ -21,6 +21,8 @@ public class Rider implements Runnable{
 	private double speedFlat;
 	private double speedTT;
 	private double raceTime;
+	private int distanceToRide;
+	private int distanceCovered;
 	private String[] firstName = { //generator -- first name
 		"Noah","Liam","Mason","Jacob","William","Ethan","James","Alexander","Michael","Benjamin",
 		"Elijah","Daniel","Aiden","Logan","Matthew","Lucas","Jackson","David","Oliver","Jayden",
@@ -78,12 +80,17 @@ public class Rider implements Runnable{
 	 */
 	public Rider(){
 		rand = new Random();
+		distanceToRide = 0;
+	}
+	public Rider(int _distanceToRide){
+		rand = new Random();
+		distanceToRide = _distanceToRide;
 	}
 	/*
 	 * PARAM CONSTRUCTOR
 	 * for creating a specific rider
 	 */
-	public Rider(String _name, int _age, String _country, int _height, int _weight, int _ratingMtn, int _ratingHill, int _ratingFlat, int _ratingTT){
+	public Rider(String _name, int _age, String _country, int _height, int _weight, int _ratingMtn, int _ratingHill, int _ratingFlat, int _ratingTT, int _distanceToRide){
 		rand = new Random();
 		
 		name = _name;
@@ -95,6 +102,7 @@ public class Rider implements Runnable{
 		ratingHill = _ratingMtn;
 		ratingFlat = _ratingFlat;
 		ratingTT = _ratingTT;
+		distanceToRide = _distanceToRide;
 	}
 	
 	/*
@@ -344,78 +352,75 @@ public class Rider implements Runnable{
 		
 		return formattedTime;
 	}
+	//distance to ride
+	public void setDistanceToRide(int _distanceToRide){
+		distanceToRide = _distanceToRide;
+	}
+	public int getDistanceToRide(){
+		return distanceToRide;
+	}
+	//distance covered
+	public void setDistanceCovered(int _distanceCovered){
+		distanceCovered = _distanceCovered;
+	}
+	public int getDistanceCovered(){
+		return distanceCovered;
+	}
 	
 	/*
 	 * GENERAL FUNCTIONALITY
 	 */
 	
 	//Ride
-	public void ride(int distance){//, Course course){
-		int distanceCovered = 0; //keeps track of distance covered
-		double timeCheck = 0; //keeps track of overall time
-		double time = distance / this.getSpeedFlat(); //total time to complete the course
-		double minutesPerMile = ( time / distance) * 60; //used for adjusting Thread.sleep() based on a riders speed
-		boolean racing = true;
+//	public void ride(int distance){//, Course course){
+//		distanceCovered = 0; //keeps track of distance covered
+//		double timeCheck = 0; //keeps track of overall time
+//		double time = distance / this.getSpeedFlat(); //total time to complete the course
+//		double minutesPerMile = ( time / distance) * 60; //used for adjusting Thread.sleep() based on a riders speed
+//		boolean racing = true;
+//		
+//		System.out.println(this.getName() + " started!");
+//		//every loop is 1 mile
+//		while(racing){
+//			try
+//			{	
+//				if(distanceCovered < distance){
+//					Thread.sleep((long)(minutesPerMile * 500)); //Time to complete 1 mile (multiplying by 500 to speed up simulation)
+//					timeCheck += minutesPerMile;
+//					distanceCovered++; //completed a mile
+//				}
+//				else if(distanceCovered == distance){
+//					System.out.println(this.getName() + " " + " is done! - " + timeCheck + " - " + this.getSpeedFlat());
+//					racing = false;
+//				}
+//			}
+//			catch(Exception e){
+//				System.out.println(e);
+//			}
+//		}
+//	}
+	public void ride(int distance){
+		//time = distance / speed (5 hours = 100miles / 20mph)
+		//simulating time to complete 1 mile - (5hours * 60,000milliseconds) / numOfMilesToRace
+		double timeToCompleteCourse = distance / this.getSpeedFlat();
+		double timeToCompleteMile = (timeToCompleteCourse * 60000) / distance;
+		int mileCount = 0;
 		
-		System.out.println(this.getName() + " started!");
-		//every loop is 1 mile
-		while(racing){
-			try
-			{	
-				if(distanceCovered < distance){
-					Thread.sleep((long)(minutesPerMile * 500)); //Time to complete 1 mile (multiplying by 500 to speed up simulation)
-					timeCheck += minutesPerMile;
-					distanceCovered++; //completed a mile
-				}
-				else if(distanceCovered == distance){
-					System.out.println(this.getName() + " " + " is done! - " + timeCheck + " - " + this.getSpeedFlat());
-					racing = false;
-				}
-			}
-			catch(Exception e){
-				System.out.println(e);
+		System.out.println(this.getName() + " started.");
+		
+		//1 loop will be 1 mile
+		while(distance != 0){
+			try {
+				Thread.sleep((long)timeToCompleteMile);
+				distance--;
+				mileCount++;
+				System.out.println(this.getName() + " completed mile " + mileCount + " - " + this.getSpeedFlat());
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
-	}
-	//Ride Mountain
-	public double rideMountain(int distance){
-		//time = distance/speed
-		double obstacleDistance = (double)distance;
-		double timeToCompleteObstacle = obstacleDistance/this.getSpeedMtn();
 		
-		raceTime += timeToCompleteObstacle;
-		
-		return timeToCompleteObstacle;
-	}
-	//Ride Hill
-	public double rideHill(int distance){
-		//time = distance/speed
-		double obstacleDistance = (double)distance;
-		double timeToCompleteObstacle = obstacleDistance/this.getSpeedHill();
-		
-		raceTime += timeToCompleteObstacle;
-		
-		return timeToCompleteObstacle;
-	}
-	//Ride Flat
-	public double rideFlat(int distance){
-		//time = distance/speed
-		double obstacleDistance = (double)distance;
-		double timeToCompleteObstacle = obstacleDistance/this.getSpeedFlat();
-		
-		raceTime += timeToCompleteObstacle;
-		
-		return timeToCompleteObstacle;
-	}
-	//Ride Time Trial
-	public double rideTimeTrial(int distance){
-		//time = distance/speed
-		double obstacleDistance = (double)distance;
-		double timeToCompleteObstacle = obstacleDistance/this.getSpeedTT();
-		
-		raceTime += timeToCompleteObstacle;
-		
-		return timeToCompleteObstacle;
+		System.out.println(this.getName() + " finished!" + " - " + timeToCompleteCourse);
 	}
 	//Ratings -- eventually use it to generate pro teams with a minimum rider overall of 'x'
 	public void generateRatings(){
@@ -478,6 +483,6 @@ public class Rider implements Runnable{
 	
 	@Override
 	public void run() {
-		this.ride(21);
+		this.ride(distanceToRide);
 	}
 }

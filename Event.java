@@ -159,34 +159,14 @@ public class Event {
 		this.addRider(rider1);
 		this.addRider(rider2);
 		this.addRider(rider3);
-		this.addRider(rider4);
-		this.addRider(rider5);
-		this.addRider(rider6);
+//		this.addRider(rider4);
+//		this.addRider(rider5);
+//		this.addRider(rider6);
 		//this.addTeam(team1);
 //		this.addTeam(team2);
 		
-		//race
-//		for(Rider rider: riders){
-//			rider.rideFlat(35);
-//			rider.rideHill(10);
-//			rider.rideFlat(35);
-//			rider.rideMountain(20);
-//			rider.rideFlat(10);
-//			
-//			finishedRiders.add(rider);
-//		}
-//		
-//		//place riders
-//		this.placeRiders();
-//		
-//		//results
-//		int place = 1;
-//		for(Rider rider: finishedRiders){
-//			System.out.println(place + ": " + rider.getName() + " - " + rider.getRaceTime());
-//			place++;
-//		}
-		
 		for(Rider rider: riders){
+			rider.setDistanceToRide(10);
 			Thread theRider = new Thread(rider);
 			theRider.start();
 		}
